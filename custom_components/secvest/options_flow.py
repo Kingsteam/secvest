@@ -29,6 +29,7 @@ from .api.errors import (
 from .codes import CODE_PATTERN, async_prepare, code_of
 from .const import (
     CONF_ADVANCED,
+    CONF_ARM_WITHOUT_CODE,
     CONF_CODES,
     CONF_EXCLUDED_ZONES,
     CONF_INSTALLATION_NAME,
@@ -260,8 +261,32 @@ class SecvestOptionsFlow(OptionsFlow):
         """Add, change or remove a code."""
         menu = ["add_code"]
         if self.config_entry.options.get(CONF_CODES):
-            menu += ["change_code", "remove_code"]
+            menu += ["change_code", "remove_code", "code_arming"]
         return self.async_show_menu(step_id="codes", menu_options=menu)
+
+    async def async_step_code_arming(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Fork Kingsteam: whether arming needs a code; disarming always does."""
+        if user_input is not None:
+            return self.async_create_entry(
+                data={
+                    **self.config_entry.options,
+                    CONF_ARM_WITHOUT_CODE: bool(user_input[CONF_ARM_WITHOUT_CODE]),
+                }
+            )
+        schema = vol.Schema({vol.Required(CONF_ARM_WITHOUT_CODE): BooleanSelector()})
+        return self.async_show_form(
+            step_id="code_arming",
+            data_schema=self.add_suggested_values_to_schema(
+                schema,
+                {
+                    CONF_ARM_WITHOUT_CODE: self.config_entry.options.get(
+                        CONF_ARM_WITHOUT_CODE, False
+                    )
+                },
+            ),
+        )
 
     async def async_step_add_code(
         self, user_input: dict[str, Any] | None = None

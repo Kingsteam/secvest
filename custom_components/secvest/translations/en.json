@@ -435,7 +435,8 @@
         "menu_options": {
           "add_code": "Add code",
           "change_code": "Change code",
-          "remove_code": "Remove code"
+          "remove_code": "Remove code",
+          "code_arming": "Arming without a code"
         }
       },
       "add_code": {
@@ -479,6 +480,16 @@
       "names": {
         "title": "Take over names from the panel",
         "description": "Names of partitions and zones renamed at the panel follow by themselves within one polling round. This also reads the installation's name from the panel once and names the panel device after it, then reloads the integration. Entity ids, the entry's title and names you set in Home Assistant stay."
+      },
+      "code_arming": {
+        "title": "Arming without a code",
+        "description": "Fork Kingsteam: arming works without a code, e.g. for an automation when leaving the house. Disarming still needs a code. A code entered while arming is still checked.",
+        "data": {
+          "arm_without_code": "Arm without a code"
+        },
+        "data_description": {
+          "arm_without_code": "Disarming always needs a code."
+        }
       }
     },
     "error": {

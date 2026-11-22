@@ -5,10 +5,10 @@
     "@thomasdanz"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/thomasdanz/ha-secvest",
+  "documentation": "https://github.com/Kingsteam/secvest",
   "integration_type": "hub",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/thomasdanz/ha-secvest/issues",
+  "issue_tracker": "https://github.com/Kingsteam/secvest/issues",
   "requirements": [],
-  "version": "1.1.2"
+  "version": "1.1.2+ks.1"
 }

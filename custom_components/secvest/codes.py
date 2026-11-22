@@ -19,7 +19,7 @@ from typing import TYPE_CHECKING, Any
 
 from homeassistant.const import CONF_NAME
 
-from .const import CONF_CODES
+from .const import CONF_ARM_WITHOUT_CODE, CONF_CODES
 
 if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
@@ -87,6 +87,14 @@ def code_of(stored: Mapping[str, Any]) -> Code:
 def codes(entry: ConfigEntry) -> list[Code]:
     """Return the configured codes."""
     return [code_of(stored) for stored in entry.options.get(CONF_CODES, [])]
+
+
+def arm_without_code(entry: ConfigEntry) -> bool:
+    """Whether arming works without a code while codes are configured.
+
+    Fork Kingsteam: an automation can then arm, disarming still needs a code.
+    """
+    return bool(entry.options.get(CONF_ARM_WITHOUT_CODE, False))
 
 
 def matches(stored: Code, code: str) -> bool:

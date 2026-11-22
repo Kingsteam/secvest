@@ -249,7 +249,13 @@ async def test_codes_menu(hass: HomeAssistant, setup: Setup) -> None:
     result = await hass.config_entries.options.async_configure(
         result["flow_id"], {"next_step_id": "codes"}
     )
-    assert result["menu_options"] == ["add_code", "change_code", "remove_code"]
+    # fork Kingsteam: plus "code_arming"
+    assert result["menu_options"] == [
+        "add_code",
+        "change_code",
+        "remove_code",
+        "code_arming",
+    ]
 
 
 async def test_codes_while_not_loaded(hass: HomeAssistant, setup: Setup) -> None:

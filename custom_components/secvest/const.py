@@ -31,6 +31,9 @@ SUBENTRY_ZONE_GROUP = "zone_group"
 # codes for arming and disarming: in the options (#141); subentries of this
 # type up to 0.3, moved by the migration to 1.3
 CONF_CODES = "codes"
+# fork Kingsteam: arming needs no code while codes are configured; disarming
+# still does (code_arm_required False)
+CONF_ARM_WITHOUT_CODE = "arm_without_code"
 SUBENTRY_CODE = "code"
 CONF_ZONES = "zones"
 CONF_HIDE_MEMBERS = "hide_members"

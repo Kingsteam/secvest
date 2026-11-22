@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [1.1.2+ks.1] - 2026-11-22
+
+Fork Kingsteam (Kingsteam/secvest) of 1.1.2; everything else as in the original.
+
+### Added
+
+- Option "Arming without a code" in the codes menu: while codes are configured, arming (also internally and with omitting) works without a code, e.g. for an automation when leaving the house; disarming still needs a code. A code entered while arming is still checked. Off by default; switching it doesn't reload the integration.
+
 ## [1.1.2] - 2026-11-05
 
 ### Changed
