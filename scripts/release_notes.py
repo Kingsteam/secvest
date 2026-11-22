@@ -29,8 +29,11 @@ def section(changelog: str, version: str) -> str | None:
 
 def main() -> int:
     """Check the versions and print the notes."""
-    if len(sys.argv) != 2 or not re.fullmatch(r"v\d+\.\d+\.\d+", sys.argv[1]):
-        print("usage: release_notes.py vX.Y.Z", file=sys.stderr)
+    if len(sys.argv) != 2 or not re.fullmatch(
+        r"v\d+\.\d+\.\d+(\+hw18\.\d+)?", sys.argv[1]
+    ):
+        # fork HW18: also vX.Y.Z+hw18.N
+        print("usage: release_notes.py vX.Y.Z[+hw18.N]", file=sys.stderr)
         return 2
     version = sys.argv[1].removeprefix("v")
     manifest = json.loads(

@@ -1,5 +1,7 @@
 # ABUS Secvest for Home Assistant
 
+> **Fork HW18:** Abzweigung von [thomasdanz/ha-secvest](https://github.com/thomasdanz/ha-secvest) mit einer zusätzlichen Einstellung „Aktivieren ohne Code“ (Deaktivieren nur mit Code). Siehe [`docs/FORK.md`](docs/FORK.md).
+
 [![Marketplace / HACS: custom repository](https://img.shields.io/badge/Marketplace%20%2F%20HACS-custom%20repository-41BDF5.svg)](#installation)
 [![Release](https://img.shields.io/github/v/release/thomasdanz/ha-secvest)](https://github.com/thomasdanz/ha-secvest/releases)
 [![Home Assistant](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fthomasdanz%2Fha-secvest%2Fmain%2Fhacs.json&query=%24.homeassistant&prefix=%E2%89%A5%20&label=Home%20Assistant&color=41BDF5)](#supported-versions)

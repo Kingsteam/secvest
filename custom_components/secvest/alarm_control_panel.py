@@ -15,7 +15,7 @@ from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from . import SecvestConfigEntry
 from .api.models import AlarmType, PanelEvent, Partition, PartitionState
-from .codes import async_find, codes
+from .codes import arm_without_code, async_find, codes
 from .commands import (
     Failure,
     Request,
@@ -117,8 +117,10 @@ class SecvestAlarmPanel(SecvestEntity, AlarmControlPanelEntity):
 
         Home Assistant itself then refuses arming without a code, before this
         entity sees it, so no arming_failed event is fired for it (#143).
+        Fork HW18: not with "arm without code"; disarming still needs one.
         """
-        return bool(codes(self.coordinator.config_entry))
+        entry = self.coordinator.config_entry
+        return bool(codes(entry)) and not arm_without_code(entry)
 
     @property
     def _partition(self) -> Partition | None:
@@ -206,7 +208,11 @@ class SecvestAlarmPanel(SecvestEntity, AlarmControlPanelEntity):
         """
         entry = self.coordinator.config_entry
         name: str | None = None
-        if codes(entry):
+        # fork HW18: arming without a code; a code given anyway is checked
+        arming_freely = (
+            target != PartitionState.UNSET and arm_without_code(entry) and not code
+        )
+        if codes(entry) and not arming_freely:
             user = await async_find(self.hass, entry, code)
             if user is None:
                 _LOGGER.warning("Wrong code for partition %s", self.number)

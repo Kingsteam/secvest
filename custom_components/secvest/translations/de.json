@@ -435,7 +435,8 @@
         "menu_options": {
           "add_code": "Code hinzufügen",
           "change_code": "Code ändern",
-          "remove_code": "Code entfernen"
+          "remove_code": "Code entfernen",
+          "code_arming": "Aktivieren ohne Code"
         }
       },
       "add_code": {
@@ -479,6 +480,16 @@
       "names": {
         "title": "Namen von der Zentrale übernehmen",
         "description": "Namen von Teilbereichen und Zonen, die an der Zentrale umbenannt wurden, folgen innerhalb einer Abfragerunde von selbst. Hier wird zusätzlich einmal der Name der Anlage von der Zentrale gelesen und das Gerät der Zentrale danach benannt; danach lädt die Integration neu. Entity-IDs, der Titel des Eintrags und in Home Assistant vergebene Namen bleiben."
+      },
+      "code_arming": {
+        "title": "Aktivieren ohne Code",
+        "description": "Fork HW18: Aktivieren geht ohne Code, z. B. für eine Automation beim Verlassen des Hauses. Deaktivieren braucht weiterhin einen Code. Ein beim Aktivieren eingegebener Code wird trotzdem geprüft.",
+        "data": {
+          "arm_without_code": "Aktivieren ohne Code"
+        },
+        "data_description": {
+          "arm_without_code": "Deaktivieren braucht immer einen Code."
+        }
       }
     },
     "error": {

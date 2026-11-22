@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+> **Fork HW18 (Kingsteam/secvest):** Zuerst `docs/FORK.md` lesen (Deutsch). Dort steht, was sich gegenüber dem Original unterscheidet und wie man neue Versionen übernimmt. Der Besitzer ist kein Entwickler: mit ihm Deutsch und einfach sprechen. Der Rest dieser Datei stammt vom Original.
+
 Guidance for AI coding assistants working on this repository. Human contributors: see `CONTRIBUTING.md`.
 
 ## What this is

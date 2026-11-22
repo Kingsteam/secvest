@@ -2,6 +2,7 @@
 
 import logging
 import re
+from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import ATTR_CODE, CONF_PASSWORD, CONF_URL, Platform
@@ -20,6 +21,7 @@ from .api.transport import Transport
 from .config_flow import default_user_agent, verification
 from .const import (
     ATTR_MODE,
+    CONF_ARM_WITHOUT_CODE,
     CONF_AUTH_FAILED,
     CONF_CERTIFICATE_CHANGED,
     CONF_CODES,
@@ -126,7 +128,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: SecvestConfigEntry) -> b
     # certificate set
     snapshot = reload_snapshot(entry)
     auth_failed = [_blocked(entry)]
-    stored_codes = [entry.options.get(CONF_CODES, [])]
+
+    def _code_options(entry: SecvestConfigEntry) -> tuple[Any, bool]:
+        return (
+            entry.options.get(CONF_CODES, []),
+            bool(entry.options.get(CONF_ARM_WITHOUT_CODE, False)),
+        )
+
+    stored_codes = [_code_options(entry)]
 
     async def _reload_on_change(hass: HomeAssistant, entry: SecvestConfigEntry) -> None:
         now_failed = _blocked(entry)
@@ -134,7 +143,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: SecvestConfigEntry) -> b
         auth_failed[0] = now_failed
         if reauthenticated or reload_snapshot(entry) != snapshot:
             hass.config_entries.async_schedule_reload(entry.entry_id)
-        elif (now_codes := entry.options.get(CONF_CODES, [])) != stored_codes[0]:
+        elif (now_codes := _code_options(entry)) != stored_codes[0]:
             # no reload: the alarm panels only show whether they ask for a
             # code now (#131, #141)
             stored_codes[0] = now_codes
